@@ -1,0 +1,15 @@
+﻿/*فونت های ما*/
+@font-face {
+    font-family: vazir-bold;
+    src: url('../../font/vazir/vazir-bold.woff2');
+}
+
+@font-face {
+    font-family: vazir;
+    src: url('../../font/vazir/vazir-regular.woff2');
+}
+
+h1,h2,h3,h4,h5,h6,p,span,a,button,label,input,th,tr,div{
+    font-family: vazir-bold !important;
+}
+/*اخر فونت های ما*/

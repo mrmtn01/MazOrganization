@@ -1,0 +1,90 @@
+﻿@model MazOrganization.ViewModels.Dashboard.ProjectFieldInfoViewModel
+@{
+    ViewData["Title"] = "افزودن پروژه جدید - مشخصات زمین";
+}
+
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">افزودن پروژه جدید - مشخصات زمین</h1>
+    
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+
+        <form asp-action="AddProjectFieldInfo" asp-controller="Project" asp-route-projectid="@ViewData["id"]">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+
+            <div class="form-group">
+            <label asp-for="Address" class="control-label"></label>
+            <input asp-for="Address" class="form-control" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+            <label asp-for="LandArea" class="control-label"></label>
+            <input asp-for="LandArea" class="form-control" />
+            <span asp-validation-for="LandArea" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+            <label asp-for="Foundation" class="control-label"></label>
+            <input asp-for="Foundation" class="form-control" />
+            <span asp-validation-for="Foundation" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+            <label asp-for="LandType" class="control-label"></label>
+            <input asp-for="LandType" class="form-control" />
+            <span asp-validation-for="LandType" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+            <label asp-for="Registrationِepartment" class="control-label"></label>
+            <input asp-for="Registrationِepartment" class="form-control" />
+            <span asp-validation-for="Registrationِepartment" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+            <label asp-for="Assumed" class="control-label"></label>
+            <input asp-for="Assumed" class="form-control" />
+            <span asp-validation-for="Assumed" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+            <label asp-for="Piece" class="control-label"></label>
+            <input asp-for="Piece" class="form-control" />
+            <span asp-validation-for="Piece" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+            <label asp-for="Main" class="control-label"></label>
+            <input asp-for="Main" class="form-control" />
+            <span asp-validation-for="Main" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+            <label asp-for="Sub" class="control-label"></label>
+            <input asp-for="Sub" class="form-control" />
+            <span asp-validation-for="Sub" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+            <label asp-for="ContractNo" class="control-label"></label>
+            <input asp-for="ContractNo" class="form-control" />
+            <span asp-validation-for="ContractNo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+            <label asp-for="Assignor" class="control-label"></label>
+            <input asp-for="Assignor" class="form-control" />
+            <span asp-validation-for="Assignor" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="ادامه" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

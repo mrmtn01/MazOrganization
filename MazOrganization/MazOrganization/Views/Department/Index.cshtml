@@ -1,0 +1,77 @@
+﻿@using MazOrganization.ViewModels.Dashboard;
+@model DashboardDepartmentViewModel[]
+@{
+    ViewData["Title"] = "دپارتمان ها";
+}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">دپارتمان ها</h1>
+    <a asp-action="AddDepartment" asp-controller="Department" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
+        افزودن دپارتمان
+    </a>
+</div>
+
+<style>
+    .male{
+        width: 100% !important;
+    }
+</style>
+
+<div class="row">
+
+
+    <!-- Bar Chart -->
+    <div class=" male card shadow mb-4">
+        
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>نام دپارتمان</th>
+                            <th>تعداد پروژه های دپارتمان</th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.DepartmentName</td>
+                                <td>
+                                    @item.count
+                                </td>
+                                <td>
+                                    <a asp-action="Department" asp-controller="Search" asp-route-id="@item.Id" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                        مشاهده پروژه ها
+                                    </a>
+                                    <a asp-action="EditDepartment" asp-controller="Department" asp-route-departmentId="@item.Id" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm">
+                                        ویرایش
+                                    </a>
+                                    <a asp-action="RemoveDepartment" asp-controller="Department" asp-route-departmentId="@item.Id" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
+                                        حذف
+                                    </a>
+                                </td>
+
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+</div>
+
+

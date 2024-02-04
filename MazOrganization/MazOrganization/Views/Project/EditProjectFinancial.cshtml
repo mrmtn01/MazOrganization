@@ -1,0 +1,45 @@
+﻿@model MazOrganization.ViewModels.Dashboard.AddProjectFinancialViewModel
+@{
+    ViewData["Title"] = "ویرایش پروژه - حسابداری پروژه";
+}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">ویرایش پروژه - حسابداری پروژه</h1>
+
+</div>
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditProjectFinancial" asp-controller="Project">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="ProjectId" type="hidden" class="form-control" />
+            <input asp-for="financialId" type="hidden" class="form-control" />
+
+            <div class="form-group">
+                <label asp-for="TotalAmount" class="control-label"></label>
+                <input asp-for="TotalAmount" class="form-control" />
+                <span asp-validation-for="TotalAmount" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Debtor" class="control-label"></label>
+                <input asp-for="Debtor" class="form-control" />
+                <span asp-validation-for="Debtor" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Creditor" class="control-label"></label>
+                <input asp-for="Creditor" class="form-control" />
+                <span asp-validation-for="Creditor" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="ثبت تغییرات" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+

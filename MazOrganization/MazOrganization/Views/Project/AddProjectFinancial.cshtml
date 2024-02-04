@@ -1,0 +1,41 @@
+﻿@model MazOrganization.ViewModels.Dashboard.AddProjectFinancialViewModel
+@{
+    ViewData["Title"] = "افزودن پروژه جدید - حسابداری پروژه";
+}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">افزودن پروژه جدید - حسابداری پروژه</h1>
+
+</div>
+
+
+<div class="row">
+    <div class="col-md-4">
+
+        <form asp-action="AddProjectFinancial" asp-controller="Project" asp-route-projectid="@ViewData["id"]">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="TotalAmount" class="control-label"></label>
+                <input asp-for="TotalAmount" class="form-control" />
+                <span asp-validation-for="TotalAmount" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Debtor" class="control-label"></label>
+                <input asp-for="Debtor" class="form-control" />
+                <span asp-validation-for="Debtor" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Creditor" class="control-label"></label>
+                <input asp-for="Creditor" class="form-control" />
+                <span asp-validation-for="Creditor" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="ادامه" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+﻿@using MazOrganization.ViewModels.Dashboard;
+@model IEnumerable<ReferralDViewmodel>
+@{
+    ViewData["Title"] = "معرف ها";
+}
+
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">معرف ها</h1>
+    <a asp-action="AddReferrals" asp-controller="Referral" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+       افزودن معرف جدید
+    </a>
+</div>
+
+<table class="table table-bordered">
+    <tr class="text-white bg-dark">
+        <th>نام معرف</th>
+        <th>تعداد پروژه ها</th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.ReferralName
+            </td>
+            <td>
+                @item.Count
+            </td>
+
+            <td>
+                <a class="btn btn-primary" asp-action="Referral" asp-controller="Search" asp-route-id="@item.ReferralId">مشاهده پروژه ها</a>
+                @{
+                    if(item.ReferralId == 1)
+                    {
+
+                    }
+                    else
+                    {
+                        <a class="btn btn-success" asp-action="ShowReferrals" asp-controller="Referral" asp-route-referralId="@item.ReferralId">مشاهده اطلاعات</a>
+                        <a class="btn btn-warning" asp-action="EditReferrals" asp-controller="Referral" asp-route-referralId="@item.ReferralId">ویرایش</a>
+                        <a class="btn btn-danger" asp-action="RemoveReferrals" asp-controller="Referral" asp-route-referralId="@item.ReferralId">حذف</a>
+                    }
+                }
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,241 @@
+﻿@using MazOrganization.ViewModels.Dashboard;
+@model DashboardDepartmentViewModel[]
+@{
+    ViewData["Title"] = "داشبورد";
+}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">داشبورد</h1>
+    <a href="https://mazegroup.ir/" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        مشاهده سایت
+    </a>
+</div>
+<style>
+    .h-100 {
+        height: 100px !important;
+    }
+
+    .malekhodeshe {
+        margin-right: 1rem;
+    }
+
+    @@media (min-width: 990px) {
+        .malekhodeshe {
+            width: 65% !important;
+            margin-left: 0rem !important;
+        }
+    }
+
+    .text-xs {
+        font-size: 1.1rem !important;
+    }
+
+    @@media (min-width: 360px) {
+        .malekhodeshe {
+            width: 100%;
+            margin-left: 1rem;
+        }
+    }
+</style>
+
+<!-- Content Row -->
+<div class="row">
+
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            تعداد پروژه ها
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewData["Project"]</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            تعداد دپارتمان ها
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewData["Department"]</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-university"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            تعداد معرف ها
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewData["Referral"]</div>
+                    </div>
+
+                    <div class="col-auto">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pending Requests Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            تعداد کاربر ها
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewData["Account"]</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-users"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Content Row -->
+
+
+
+
+<div class="row">
+
+
+    <!-- Bar Chart -->
+    <div class="malekhodeshe card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">تعداد پروژه براساس دپارتمان</h6>
+        </div>
+        <div class="card-body">
+            
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>نام دپارتمان</th>
+                            <th>تعداد پروژه های دپارتمان</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.DepartmentName</td>
+                                <td>
+                                    @item.count
+                                </td>
+
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <div class="col-xl-4 col-lg-5">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">وضعیت پروژه ها</h6>
+
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-pie pt-4 pb-2">
+                    <canvas id="myPieChart2"></canvas>
+                </div>
+                <div class="mt-4 text-center small">
+                    <span class="mr-2">
+                        <i class="fas fa-circle text-primary"></i> درحال انجام
+                    </span>
+                    <span class="mr-2">
+                        <i class="fas fa-circle text-success"></i> بسته شده
+                    </span>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+@section Scripts {
+
+    <script>
+        // Set new default font family and font color to mimic Bootstrap's default styling
+        Chart.defaults.global.defaultFontFamily = 'vazir-bold';
+        Chart.defaults.global.defaultFontColor = '#858796';
+
+        // Pie Chart Example
+        var ctx = document.getElementById("myPieChart2");
+        var myPieChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ["بسته شده", "درحال انجام"],
+                datasets: [{
+                    data: [@ViewData["IsDoneProject"] , @ViewData["NormalProject"]],
+                    backgroundColor: ['#1cc88a', '#4e73df'],
+                    hoverBackgroundColor: ['#17a673', '#2c9faf'],
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                },
+                legend: {
+                    display: false
+                },
+                cutoutPercentage: 80,
+            },
+        });
+
+    </script>
+    }

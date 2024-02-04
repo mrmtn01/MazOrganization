@@ -1,0 +1,50 @@
+﻿@using System.IO;
+@model IEnumerable<ProjectFile>
+@{
+    ViewData["Title"] = "فایل های پروژه";
+}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">فایل های پروژه</h1>
+    <a asp-action="Index" asp-controller="Upload" asp-route-id="@ViewData["id"]" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        افزودن فایل جدید
+    </a>
+</div>
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>عنوان فایل</th>
+                        <th></th>
+                        
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    @foreach(var item in Model)
+                    {
+                        <tr>
+                            <td>@item.FileTittle</td>
+                            <td>
+
+                                <a asp-action="Download" asp-controller="Upload" asp-route-id="@item.FileId" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
+                                    دانلود فایل
+                                </a>
+                                <a asp-action="Remove" asp-controller="Upload" asp-route-id="@item.FileId" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
+                                    حذف فایل
+                                </a>
+                            </td>
+
+                        </tr>
+                    }
+
+         
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

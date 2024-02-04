@@ -1,0 +1,234 @@
+﻿@model MazOrganization.ViewModels.Dashboard.ShowProjectViewModel
+@{
+    ViewData["Title"] = "اطلاعات پروژه";
+}
+
+<style>
+    .buttons-for-scroll {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        left: 1%;
+        gap: 0.5rem;
+    }
+</style>
+
+<h1 class="h3 mb-0 text-gray-800">اطلاعات اصلی پروژه</h1>
+
+<div class="buttons-for-scroll d-sm-flex align-items-center justify-content-between mb-4">
+
+    <a href="#person" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        مشخصات فردی
+    </a>
+    <a href="#field" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        مشخصات زمین
+    </a>
+    <a href="#financial" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        مشخصات مالی
+    </a>
+    <a asp-action="Show" asp-controller="Upload" asp-route-id="@ViewData["id"]" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        مشاهده فایل ها
+    </a>
+    <a asp-action="EditProjectMain" asp-controller="Project" asp-route-projectId="@ViewData["id"]" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm">
+        ویرایش
+    </a>
+    <a asp-action="Index" asp-controller="Upload" asp-route-id="@ViewData["id"]" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
+        افزودن فایل
+    </a>
+    <a asp-action="RemoveProject" asp-controller="Project" asp-route-projectId="@ViewData["id"]" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
+        حذف
+    </a>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <form>
+            </br>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="FieldInfoId" type="hidden" class="form-control" />
+            <input asp-for="PersonInfoId" type="hidden" class="form-control" />
+            <input asp-for="financialId" type="hidden" class="form-control" />
+
+            <div class="form-group">
+                <label class="control-label">شماره پروژه</label>
+                <input asp-for="ProjectId" readonly class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ProjectName" class="control-label"></label>
+                <input asp-for="ProjectName" readonly class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ReferralName" class="control-label"></label>
+                <input asp-for="ReferralName" readonly class="form-control" />
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="typeofapplication" class="control-label"></label>
+                <input asp-for="typeofapplication" readonly class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CreateDate" class="control-label"></label>
+                <input asp-for="CreateDate" readonly class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">وضعیت پروژه</label>
+                @{
+                    if (Model.IsDone == false)
+                    {
+                        <input value="درحال انجام" readonly class="form-control" />
+
+                    }
+                    else
+                    {
+                        <input value="به اتمام رسیده" readonly class="form-control" />
+
+                    }
+                }
+
+            </div>
+
+            <br />
+            <div id="person" class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">مشخصات فردی</h1>
+
+
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FullName" class="control-label"></label>
+                <input asp-for="FullName" readonly class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FatherName" class="control-label"></label>
+                <input asp-for="FatherName" readonly class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PlaceIssue" class="control-label"></label>
+                <input asp-for="PlaceIssue" readonly class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PersonNo" class="control-label"></label>
+                <input asp-for="PersonNo" readonly class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="NationalCode" class="control-label"></label>
+                <input asp-for="NationalCode" readonly class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="BirthDate" class="control-label"></label>
+                <input asp-for="BirthDate" readonly class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Number" class="control-label"></label>
+                <input asp-for="Number" readonly class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TelNumber" class="control-label"></label>
+                <input asp-for="TelNumber" readonly class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" readonly class="form-control" />
+            </div>
+
+            <br />
+            <div id="field" class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">مشخصات زمین</h1>
+
+
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" readonly class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="LandArea" class="control-label"></label>
+                <input asp-for="LandArea" readonly class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Foundation" class="control-label"></label>
+                <input asp-for="Foundation" readonly class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="LandType" class="control-label"></label>
+                <input asp-for="LandType" readonly class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Registrationِepartment" class="control-label"></label>
+                <input asp-for="Registrationِepartment" readonly class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Assumed" class="control-label"></label>
+                <input asp-for="Assumed" readonly class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Piece" class="control-label"></label>
+                <input asp-for="Piece" readonly class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Main" class="control-label"></label>
+                <input asp-for="Main" readonly class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Sub" class="control-label"></label>
+                <input asp-for="Sub" readonly class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ContractNo" class="control-label"></label>
+                <input asp-for="ContractNo" readonly class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Assignor" class="control-label"></label>
+                <input asp-for="Assignor" readonly class="form-control" />
+            </div>
+
+            </br>
+            <div id="financial" class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">مشخصات مالی</h1>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TotalAmount" class="control-label"></label>
+                <input asp-for="TotalAmount" readonly class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Debtor" class="control-label"></label>
+                <input asp-for="Debtor" readonly class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Creditor" class="control-label"></label>
+                <input asp-for="Creditor" readonly class="form-control" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+
+

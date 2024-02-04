@@ -1,0 +1,109 @@
+﻿@using MazOrganization.Models;
+@model IEnumerable<Project>
+@{
+    ViewData["Title"] = "نتیجه جستجو : " + ViewData["search"];
+}
+
+<style>
+    .male {
+        width: 100% !important;
+    }
+</style>
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">@ViewData["Title"]</h1>
+    
+</div>
+
+<div class="row">
+
+
+    <!-- Bar Chart -->
+    <div class=" male card shadow mb-4">
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>شماره پروژه</th>
+                            <th>عنوان پروژه</th>
+                            <th>نام معرف</th>
+                            <th>وضعیت پروژه</th>
+                            <th>تاریخ ثبت</th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+
+                            DateTime time = item.CreateDate;
+                            string PersianDate = string.Format("{0}/{1}/{2}", time.Year, time.Month, time.Day);
+
+
+
+                            <tr>
+                                <td>@item.ProjectId</td>
+                                <td>@item.ProjectName</td>
+                                <td>@item.Referralname</td>
+                                <td>
+                                    @{
+                                        if(item.IsDone == false)
+                                        {
+                                            <p>درحال انجام</p>
+                                        }
+                                        else
+                                        {
+                                            <p>بسته شده</p>
+
+                                        }
+                                    }
+                                </td>
+                                <td>@PersianDate</td>
+                                <td>
+                                    @{
+                                        if (item.IsDone == false)
+                                        {
+                                            <a asp-action="IsDoneProject" asp-controller="Project" asp-route-projectId="@item.ProjectId" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
+                                                تکمیل شد
+                                            </a>
+                                        }
+
+                                    }
+                                    <a asp-action="EditProjectMain" asp-controller="Project" asp-route-projectId="@item.ProjectId" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm">
+                                        ویرایش
+                                    </a>
+                                    <a asp-action="ShowProject" asp-controller="Project" asp-route-projectId="@item.ProjectId" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                        مشاهده
+                                    </a>
+                                    <a asp-action="Index" asp-controller="Upload" asp-route-id="@item.ProjectId" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
+                                        افزودن فایل
+                                    </a>
+                                    <a asp-action="RemoveProject" asp-controller="Project" asp-route-projectId="@item.ProjectId" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
+                                        حذف
+                                    </a>
+
+                                </td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+</div>
+
+

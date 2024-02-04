@@ -1,0 +1,221 @@
+﻿@using MazOrganization.ViewModels.Dashboard;
+@model List<NewShowProjectViewModel>
+@{
+    ViewData["Title"] = "مدیریت پروژه ها";
+}
+
+<style>
+    th{
+        color: #fff;
+    }
+
+    .male {
+        width: 100% !important;
+        border-radius: 25px;
+    }
+
+    .margin-left-auto{
+        margin-left: auto;
+    }
+
+    .gap-1{
+        gap: 1rem;
+    }
+
+    .bg-thead{
+        background-color: #050628;
+    }
+
+    .table-br{
+        border-top-right-radius: 25px;
+        border-top-left-radius: 25px;
+        overflow: hidden;
+    }
+
+    .table-buttons{
+        display: flex;
+        justify-content: center;
+    }
+</style>
+
+
+<div class="d-sm-flex gap-1 align-items-center justify-content-end mb-4">
+    <h1 class="h3 mb-0 text-gray-800 margin-left-auto">@ViewData["Title"]</h1>
+    <a asp-action="AddProject" asp-controller="Project" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        فیلتر پروژه ها
+    </a>
+    <a asp-action="AddProject" asp-controller="Project" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
+        افزودن پروژه جدید
+    </a>
+    
+</div>
+
+
+
+
+
+<div>
+    @foreach(var item in Model)
+    {
+
+        <div class="row">
+
+
+            <!-- Bar Chart -->
+            <div class=" male card shadow mb-4">
+
+                <div class="card-body">
+                    <h1 class="h3 mb-0 text-gray-800">@item.ProjectId</h1>
+                    <div class="table-responsive">
+                        <table class="table table-br table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead class="bg-thead">
+                                <tr>
+                                    <th>شماره پروژه</th>
+                                    <th>نام و نام خانوادگی</th>
+                                    <th>نام معرف</th>
+                                    <th>وضعیت پروژه</th>
+                                    <th>تاریخ ثبت</th>
+
+                                    <th>شماره ملی</th>
+                                    <th>شماره شناسنامه</th>
+                                    <th>موقعیت زمین</th>
+                                    <th>وضعیت مالی</th>
+                                    <th>نوع درخواست</th>
+
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>@item.ProjectId</td>
+                                    <td>@item.Fullname</td>
+                                    <td>@item.ReferralsFullname</td>
+                                    <td>@item.Status</td>
+                                    <td>@item.CreateDate</td>
+
+                                    <td>@item.NationalCode</td>
+                                    <td>@item.PersonNo</td>
+                                    <td>@item.Address</td>
+                                    <td>@item.Debtor</td>
+                                    <td>@item.typeofapplication</td>
+                                </tr>
+
+
+
+
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+
+        </div>
+
+
+    }
+</div>
+
+
+@*
+<div class="row">
+
+
+    <!-- Bar Chart -->
+    <div class=" male card shadow mb-4">
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>شماره پروژه</th>
+                            <th>عنوان پروژه</th>
+                            <th>نام معرف</th>
+                            <th>وضعیت پروژه</th>
+                            <th>تاریخ ثبت</th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+
+                            DateTime time = item.CreateDate;
+                            string PersianDate = string.Format("{0}/{1}/{2}", time.Year, time.Month, time.Day);
+
+
+
+                            <tr>
+                                <td>@item.ProjectId</td>
+                                <td>@item.ProjectName</td>
+                                <td>@item.Referralname</td>
+                                <td>
+                                    @{
+                                        if (item.IsDone == false)
+                                        {
+                                            <p>درحال انجام</p>
+                                        }
+                                        else
+                                        {
+                                            <p>بسته شده</p>
+
+                                        }
+                                    }
+                                </td>
+                                <td>@PersianDate</td>
+                                <td>
+                                    @{
+                                        if (item.IsDone == false)
+                                        {
+                                            <a asp-action="IsDoneProject" asp-controller="Project" asp-route-projectId="@item.ProjectId" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
+                                                تکمیل شد
+                                            </a>
+                                        }
+
+                                    }
+                                    <a asp-action="EditProjectMain" asp-controller="Project" asp-route-projectId="@item.ProjectId" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm">
+                                        ویرایش
+                                    </a>
+                                    <a asp-action="ShowProject" asp-controller="Project" asp-route-projectId="@item.ProjectId" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                        مشاهده
+                                    </a>
+                                    <a asp-action="Index" asp-controller="Upload" asp-route-id="@item.ProjectId" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
+                                        افزودن فایل
+                                    </a>
+                                    <a asp-action="RemoveProject" asp-controller="Project" asp-route-projectId="@item.ProjectId" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
+                                        حذف
+                                    </a>
+
+                                </td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+</div>
+ *@
+

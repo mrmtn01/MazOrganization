@@ -1,0 +1,316 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject RoleManager<IdentityRole> SignInManager
+
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - هلدینگ ماز</title>
+
+    <link rel="icon" href="/New folder/Untitled.webp" sizes="192x192">
+    <link rel="icon" href="/New folder/Untitled.webp" sizes="32x32">
+    <link href="~/dashboard/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    <link href="~/dashboard/css/sb-admin-2.css" rel="stylesheet" />
+    <link href="~/dashboard/css/sb-admin-2.min.css" rel="stylesheet" />
+    <link href="~/dashboard/css/fonts.css" rel="stylesheet" />
+
+    <style>
+        * {
+            direction: rtl;
+        }
+
+        .input-group > .input-group-append > .btn, .input-group > .input-group-append > .input-group-text, .input-group > .input-group-prepend:first-child > .btn:not(:first-child), .input-group > .input-group-prepend:first-child > .input-group-text:not(:first-child), .input-group > .input-group-prepend:not(:first-child) > .btn, .input-group > .input-group-prepend:not(:first-child) > .input-group-text {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+            border-bottom-left-radius: 10px;
+        }
+
+        .nav-link {
+            text-align: right !important;
+        }
+
+        .sidebar .nav-item .nav-link[data-toggle=collapse]::after {
+            float: left !important;
+            transform: scaleX(-1);
+        }
+
+        body {
+            text-align: right;
+        }
+
+        @@media (min-width: 576px) {
+            .topbar .dropdown .dropdown-menu {
+                right: -64px !important;
+            }
+        }
+
+        .topbar .nav-item .nav-link {
+            gap: 8px;
+        }
+
+        @@media (min-width: 579px) {
+            .topbar .dropdown .dropdown-menu {
+                right: -100px !important;
+            }
+        }
+
+        @@media (min-width: 992px) {
+            .topbar .dropdown .dropdown-menu {
+                right: -64px !important;
+            }
+        }
+
+        .ml-auto, .mx-auto {
+            margin-right: auto !important;
+            margin-left: 0 !important;
+        }
+
+        .sidebar .nav-item .collapse .collapse-inner .collapse-header, .sidebar .nav-item .collapsing .collapse-inner .collapse-header {
+            font-weight: 900;
+            font-size: 0.95rem;
+            color: #050628;
+        }
+    </style>
+
+</head>
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color:#050628 !important;padding-right: 0; background-image:none !important">
+
+            <br />
+
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-action="Index" asp-controller="Home">
+                <div class="sidebar-brand-icon">
+                    <img class="img-profile rounded-circle" style="max-width:8rem;"
+                         src="/New folder/Untitled.webp">
+                </div>
+
+            </a>
+
+            <br />
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" asp-action="index" asp-controller="Home">
+
+                    <span>داشبورد</span>
+                </a>
+            </li>
+
+            <li class="nav-item active">
+                <a class="nav-link collapsed" asp-action="" asp-controller="" data-toggle="collapse" data-target="#collapsewo"
+                   aria-expanded="true" aria-controls="collapsewo">
+
+                    <span>پروژه ها</span>
+                </a>
+                <div id="collapsewo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        
+                        <a class="collapse-item" asp-action="Normal" asp-controller="Project">مدیریت پروژه ها</a>
+                        <a class="collapse-item" asp-action="AddProjectMain" asp-controller="Project">افزودن پروژه جدید</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item active">
+                <a class="nav-link collapsed" asp-action="" asp-controller="" data-toggle="collapse" data-target="#collapseonew"
+                   aria-expanded="true" aria-controls="collapseonew">
+
+                    <span>دپارتمان ها</span>
+                </a>
+                <div id="collapseonew" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        
+                        <a class="collapse-item" asp-action="Index" asp-controller="Department">دپارتمان ها</a>
+                        <a class="collapse-item" asp-action="AddDepartment" asp-controller="Department">افزودن دپارتمان جدید</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item active">
+                <a class="nav-link collapsed" asp-action="" asp-controller="" data-toggle="collapse" data-target="#collapseT"
+                   aria-expanded="true" aria-controls="collapseT">
+
+                    <span>معرف ها</span>
+                </a>
+                <div id="collapseT" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        
+                        <a class="collapse-item" asp-action="Index" asp-controller="Referral">معرف ها</a>
+                        <a class="collapse-item" asp-action="AddReferrals" asp-controller="Referral">افزودن معرف جدید</a>
+
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item active">
+                <a class="nav-link collapsed" asp-action="" asp-controller="" data-toggle="collapse" data-target="#collapseTwo"
+                   aria-expanded="true" aria-controls="collapseTwo">
+
+                    <span>کاربران</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        
+                        <a class="collapse-item" asp-action="Index" asp-controller="ManageUser">تمامی کاربر</a>
+                        <a class="collapse-item" asp-action="Register" asp-controller="Account">افزودن کاربر جدید</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item active">
+                <a class="nav-link" href="https://mazegroup.ir/">
+
+                    <span>دیدن سایت</span>
+                </a>
+            </li>
+
+
+
+        </ul>
+        <!-- End of Sidebar -->
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Search -->
+                    <form asp-action="Index" asp-controller="Search" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input name ="search" type="text" class="form-control bg-light border-0 small" placeholder="جستجو..."
+                                   aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+
+
+
+                        <!-- Nav Item - User Information -->
+
+
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">@User.Identity.Name</span>
+                                <img class="img-profile rounded-circle"
+                                     src="/dashboard/img/undraw_profile.svg">
+                            </a>
+
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                 aria-labelledby="userDropdown">
+
+                                @*<div class="dropdown-divider"></div>*@
+                                <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    خروج
+                                </a>
+
+                            </div>
+                        </li>
+
+
+
+
+
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    @RenderBody()
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>تمامی حقوق برای هلدینگ ماز محفوظ است.</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    @* <h5 class="modal-title" id="exampleModalLabel">مطمئنی؟</h5> *@
+
+                </div>
+                <div class="modal-body">آیا می خواهی از اکانت خود خارج شوید؟</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">خیر</button>
+                    <form asp-controller="Account" asp-action="LogOut" method="post">
+                        <button class="btn btn-primary" type="submit">بله</button>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/dashboard/vendor/jquery/jquery.min.js"></script>
+    <script src="~/dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/dashboard/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="~/dashboard/js/sb-admin-2.min.js"></script>
+    <script src="~/dashboard/vendor/chart.js/chart.min.js"></script>
+    <script src="~/dashboard/js/demo/chart-area-demo.js"></script>
+    <script src="~/dashboard/js/demo/chart-pie-demo.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

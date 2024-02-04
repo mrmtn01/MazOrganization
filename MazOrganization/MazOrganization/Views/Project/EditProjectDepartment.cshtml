@@ -1,0 +1,33 @@
+﻿@model MazOrganization.ViewModels.Dashboard.AddProjectToDepartmentsViewModel
+@{
+    ViewData["Title"] = "ویرایش دپارتمان های پروژه";
+}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">ویرایش دپارتمان های پروژه</h1>
+
+</div>
+</br>
+@if (!Model.ProjectDepartments.Any())
+{
+    <h1>دپارتمانی پیدا نشد</h1>
+}
+else
+{
+    <form asp-controller="Project" asp-action="EditProjectDepartment" method="post">
+        <div asp-validation-summary="ModelOnly"></div>
+
+        @for (int i = 0; i < Model.ProjectDepartments.Count; i++)
+        {
+            <div class="form-group">
+                <input asp-for="@Model.ProjectDepartments[i].IsSelected" />
+                <label>@Model.ProjectDepartments[i].DepartmentName</label>
+                <input type="hidden" asp-for="@Model.ProjectDepartments[i].DepartmentId" />
+
+                <input type="hidden" asp-for="@Model.ProjectDepartments[i].DepartmentName" />
+            </div>
+        }
+        <input type="hidden" asp-for="@Model.ProjectId" />
+        <button class="btn btn-primary" type="submit">ادامه</button>
+    </form>
+}

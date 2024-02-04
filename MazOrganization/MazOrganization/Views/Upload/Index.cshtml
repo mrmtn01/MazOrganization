@@ -1,0 +1,105 @@
+﻿@model MazOrganization.ViewModels.Dashboard.UploadViewModel
+@{
+    ViewData["Title"] = "آپلود فایل جدید به پروژه";
+}
+<link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+
+<style>
+	.wrapper {
+		padding: 40px;
+		text-align: center;
+	}
+
+		.wrapper h2 {
+			padding-bottom: 20px;
+		}
+
+		.wrapper #file-input {
+			display: none;
+		}
+
+		.wrapper label[for='file-input'] * {
+			vertical-align: middle;
+			cursor: pointer;
+		}
+
+		.wrapper label[for='file-input'] span {
+			margin-left: 10px
+		}
+
+		.wrapper i.remove {
+			vertical-align: middle;
+			margin-left: 5px;
+			cursor: pointer;
+			display: none;
+		}
+</style>
+
+
+<div class="wrapper">
+	<form method="post" asp-action="Index" asp-controller="Upload" enctype="multipart/form-data">
+		<h2>افزودن فایل جدید به پروژه</h2>
+		<input type="hidden" value="@ViewData["id"]" class="form-control" />
+
+
+		<div class="form-group">
+			<label asp-for="FileTittle" class="control-label"></label>
+			<input asp-for="FileTittle" class="form-control" />
+			<span asp-validation-for="FileTittle" class="text-danger"></span>
+		</div>
+
+		<input asp-for="formFile" type="file" id="file-input">
+		<label for="file-input">
+			<i class="fa fa-paperclip fa-2x"></i>
+			<span>کلیک کن</span>
+		</label>
+		<i class="fa fa-times-circle remove"></i>
+		
+		<div class="form-group">
+			<br />
+			<input type="submit" value="آپلود فایل" class="btn btn-success" />
+		</div>
+	</form>
+</div>
+
+
+
+@section Scripts {
+	<script>
+
+		$('document').ready(function () {
+
+			var $file = $('#file-input'),
+				$label = $file.next('label'),
+				$labelText = $label.find('span'),
+				$labelRemove = $('i.remove'),
+				labelDefault = $labelText.text();
+
+			// on file change
+			$file.on('change', function (event) {
+				var fileName = $file.val().split('\\').pop();
+				if (fileName) {
+					console.log($file)
+					$labelText.text(fileName);
+					$labelRemove.show();
+				} else {
+					$labelText.text(labelDefault);
+					$labelRemove.hide();
+				}
+			});
+
+			// Remove file
+			$labelRemove.on('click', function (event) {
+				$file.val("");
+				$labelText.text(labelDefault);
+				$labelRemove.hide();
+				console.log($file)
+			});
+		})
+	</script>
+
+    }
+
+
+
+
